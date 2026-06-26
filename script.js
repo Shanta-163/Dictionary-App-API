@@ -2,6 +2,11 @@ const series=(arr)=>{
   const createHTML = arr.map((el)=>`<span class="btn">${el}</span>`)
   return(createHTML.join(" "))
 }
+function pronounceWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-EN"; // English
+  window.speechSynthesis.speak(utterance);
+}
 const manageSpinner=(status)=>{
     if (status == true ){
         document.getElementById("spinner").classList.remove("hidden");
@@ -97,7 +102,7 @@ const displayLevelWords = (words) => {
           <div class="hind-siliguri font-semibold text-[32px]">${word.meaning?word.meaning:"Can not find meaning" }/${word.pronunciation ? word.pronunciation : "Can not find pronunciation"}</div>
           <div class="flex justify-between items-center gap-5">
           <button onclick="loadWordDetails(${word.id})" class="bg-[#1A91FF10] hover:bg-[#1A91FF80]"><i class="fa-solid fa-circle-info"></i></button>
-         <button class="bg-[#1A91FF10] hover:bg-[#1A91FF80]"><i class="fa-solid fa-microphone"></i></button>
+         <button onclick = "pronounceWord('${word.word}')" class="bg-[#1A91FF10] hover:bg-[#1A91FF80]"><i class="fa-solid fa-microphone"></i></button>
          </div>
          </div>
          
